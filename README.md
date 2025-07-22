@@ -5,25 +5,27 @@ IPEye is a multi-threaded Python-based IP and Port Scanner designed for quick an
 
 # 🌐 What is IPEye?
 
-IPEye allows users to scan a range of IP addresses and a range of TCP ports simultaneously. It helps in discovering open ports and live hosts within a specified subnet and is optimized for speed using Python’s threading module.
+IPEye allows users to scan:
+
+- A **single IP** or a **range of IP addresses**
+- All **well-known TCP ports (1–1023)**
+- Optionally display **only open ports** or **both open and closed**
 
 # 🚀 Features
 
-- Scan multiple IPs and ports simultaneously
-
+- Scan **single IP** or **IP ranges**
+- Auto-scans **ports 1–1023** (well-known ports)
 - Multi-threaded for fast scanning
-
-- Easy to edit default values
-
-- Thread control to avoid overloading
-
-- Output to terminal and optionally to a file
-
-- Commented user input section for interactive scanning
+- Option to view only open ports or all
+- Error handling for invalid IP ranges
+- Output to terminal and to `scan_results.txt`
+- Shows "No open ports" if nothing is found
+- Neatly formatted results for easy reading
 
 # 📁 File Contents
 
 - `IPEye.py` – The main Python script containing the scanner code.
+- `scan_results.txt` – Auto-generated file containing the scan output.
 
 # 📝 Installation & Requirements
 
@@ -39,52 +41,65 @@ python3 --version
 python3 IPEye.py
 ```
 
-# ⚙️ Default Settings
+# ⚙️ Settings & Input
 
-By default, the script uses the following hardcoded values:
+The script starts by asking you:
 
-```python
-start_ip = "192.168.1.1"
+1. Do you want to scan a single IP or a range of IPs?
 
-end_ip = "192.168.1.5"
+2. Do you want to display only open ports or both open and closed?
 
-start_port = 20
+It then performs threaded scans across the IP(s) and ports (1–1023).
 
-end_port = 25
-```
-
-To scan different IPs or ports, uncomment the relevant sections of the code:
-
-```python
-#start_ip = input("Enter the starting IP address (e.g., 192.168.1.1): ")
-
-#end_ip = input("Enter the ending IP address (e.g., 192.168.1.5): ")
-
-#start_port = int(input("Enter the starting port (e.g., 20): "))
-
-#end_port = int(input("Enter the ending port (e.g., 25): "))
-```
-You may also want to validate IPs using the commented-out regex section.
+Invalid IP ranges are caught with an error message.
 
 # 💾 Output
 
-By default, results are printed to the terminal. To also save results to a file `(scan_results.txt)`, uncomment:
+By default, scan results are printed to the terminal.
+
+To also save the results to a file (`scan_results.txt`), uncomment the following lines in the code inside the `check_port` function:
 
 ```python
-#with open("scan_results.txt", "a") as f:
+with open("scan_results.txt", "a") as f:
+    f.write(result + "\n")
+```
 
-#f.write(result + "\n")
+Example output: 
+
+```python
+🔍 Scanning well-known ports on 192.168.1.1...
+
+[OPEN ] Port 53 on 192.168.1.1
+
+[OPEN ] Port 80 on 192.168.1.1
+
+[OPEN ] Port 443 on 192.168.1.1
+
+🔍 Scanning well-known ports on 192.168.1.2...
+
+No open ports found on 192.168.1.2.
+
+🔍 Scanning well-known ports on 192.168.1.3...
+
+No open ports found on 192.168.1.3.
+
+✅ Scanning complete.
+
 ```
 
 # 💡 How It Works
 
-- IP Range Generator: Iterates from `start_ip` to `end_ip`.
- 
-- Threaded Scanning: Each port scan runs on a separate thread.
+- IP Range Generator: Iterates from start IP to end IP
 
-- Timeout Control: Uses a 1 second timeout to avoid hanging.
+- Threaded Scanning: Each port check runs on a thread
 
-- Thread Limit: Controls thread count with `max_threads` variable.
+- Port Range: Scans TCP ports from 1 to 1023
+
+- Timeout Control: 1 second socket timeout
+
+- Thread Lock: Ensures clean terminal and file output
+
+- Validation: Prevents invalid IP ranges from running silently
 
 # ⚠️ Legal & Ethical Use
 
