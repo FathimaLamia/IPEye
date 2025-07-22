@@ -129,6 +129,6 @@ for ip in ips:
 
     # Now check and print if no open ports for this IP
     if open_ports_count.get(ip, 0) == 0:
-        print(f"\nℹ️ No open ports found on {ip}.")
+        print(f"\n No open ports found on {ip}.")
 
 print("\n✅ Scanning complete.")
