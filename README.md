@@ -13,7 +13,7 @@ IPEye allows users to scan a range of IP addresses and a range of TCP ports simu
 
 - Multi-threaded for fast scanning
 
-- Easy-to-edit default values
+- Easy to edit default values
 
 - Thread control to avoid overloading
 
@@ -82,7 +82,7 @@ By default, results are printed to the terminal. To also save results to a file 
  
 - Threaded Scanning: Each port scan runs on a separate thread.
 
-- Timeout Control: Uses a 1-second timeout to avoid hanging.
+- Timeout Control: Uses a 1 second timeout to avoid hanging.
 
 - Thread Limit: Controls thread count with `max_threads` variable.
 
